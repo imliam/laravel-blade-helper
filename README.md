@@ -56,7 +56,7 @@ This method accepts two arguments; the first is the name of the directive, and t
 
 ```php
 // Define the helper directive
-BladeHelper::helper('uppercase', 'strtoupper');
+BladeHelper::directive('uppercase', 'strtoupper');
 
 // Use it in a view
 @uppercase('Hello world.')
@@ -72,7 +72,7 @@ If no second argument is supplied, the directive will attempt to call a function
 
 ```php
 // Define the helper directive
-BladeHelper::helper('join');
+BladeHelper::directive('join');
 
 // Use it in a view
 @join('|', ['Hello', 'world'])
@@ -92,7 +92,7 @@ The second argument can also take a callback. The advantage of a callback here o
 
 ```php
 // Define the helper directive
-BladeHelper::helper('example', function($a, $b, $c = 'give', $d = 'you') {
+BladeHelper::directive('example', function($a, $b, $c = 'give', $d = 'you') {
     return "$a $b $c $d up";
 });
 
@@ -110,7 +110,7 @@ By default, all of the helper directives will echo out their contents to the vie
 
 ```php
 // Define the helper directive
-BladeHelper::helper('log', null, false);
+BladeHelper::directive('log', null, false);
 
 // Use it in a view
 @log('View loaded…')
@@ -125,7 +125,7 @@ One example of a custom Blade helper is to wrap around [FontAwesome 4](https://f
 
 ```php
 // Define the helper directive
-Blade::helper('fa', function(string $iconName, string $text = null, $classes = '') {
+Blade::directive('fa', function(string $iconName, string $text = null, $classes = '') {
     if (is_array($classes)) {
         $classes = join(' ', $classes);
     }
