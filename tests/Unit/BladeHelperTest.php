@@ -68,7 +68,7 @@ class BladeHelperTest extends TestCase
         });
         $this->assertCount(1, $this->compiler->getCustomDirectives());
         $string = '@example("Never", "gonna")';
-        $expected = '<?php echo \\' . get_class($this->helper) . '::getDirective(\'example\', "Never", "gonna"); ?>';
+        $expected = '<?php echo app(\'blade.helper\')->getDirective(\'example\', "Never", "gonna"); ?>';
         $this->assertEquals($expected, $this->compiler->compileString($string));
         echo $expected;
     }
