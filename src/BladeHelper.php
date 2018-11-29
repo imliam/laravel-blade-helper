@@ -34,7 +34,7 @@ class BladeHelper
         if (! is_string($function) && is_callable($function)) {
             $this->customDirectives[$directiveName] = $function;
 
-            $this->compiler->directive($directiveName, function ($expression) use ($directiveName, $echo, $className) {
+            $this->compiler->directive($directiveName, function ($expression) use ($directiveName, $echo) {
                 return "<?php {$echo}app('blade.helper')->getDirective('{$directiveName}', {$expression}); ?>";
             });
 
