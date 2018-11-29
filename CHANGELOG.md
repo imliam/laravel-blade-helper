@@ -8,22 +8,7 @@ The changelog format is based on [Keep a Changelog](http://keepachangelog.com/en
 
 ...
 
-## [1.0.0](https://github.com/imliam/:package_name/releases/tag/v1.0.0) - 201X-XX-XX
+## [1.0.0](https://github.com/imliam/laravel-blade-helper/releases/tag/v1.0.0) - 2018-11-29
 
 ### Added
 - Initial release
-
-### Changed
-- Nothing
-
-### Deprecated
-- Nothing
-
-### Removed
-- Nothing
-
-### Fixed
-- Nothing
-
-### Security
-- Nothing

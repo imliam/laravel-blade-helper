@@ -4,6 +4,6 @@ This project follows [semantic versioning](https://semver.org/) so any breaking 
 
 Please remember that it is not guaranteed that this file will always be up-to-date and it is recommended to lock the dependency to the minor version.
 
-## 1.0.0 - 201X-XX-XX
+## 1.0.0 - 2018-11-29
 
 - Initial release
