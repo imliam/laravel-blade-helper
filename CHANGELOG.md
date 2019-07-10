@@ -8,7 +8,14 @@ The changelog format is based on [Keep a Changelog](http://keepachangelog.com/en
 
 ...
 
+## [1.1.0](https://github.com/imliam/laravel-blade-helper/releases/tag/v1.1.0) - 2019-07-10
+
+## Added
+
+- Added `BladeHelper::if` method
+
 ## [1.0.0](https://github.com/imliam/laravel-blade-helper/releases/tag/v1.0.0) - 2018-11-29
 
 ### Added
+
 - Initial release

@@ -60,4 +60,29 @@ class BladeHelper
     {
         return $this->customDirectives[$name](...$arguments);
     }
+
+    /**
+     * Register an "if" statement directive.
+     *
+     * @param string $directiveName
+     * @param callable $function
+     *
+     * @return void
+     */
+    public function if(string $directiveName, callable $function)
+    {
+        $this->customDirectives[$directiveName] = $function;
+
+        $this->compiler->directive($directiveName, function ($expression) use ($directiveName) {
+            return "<?php if (app('blade.helper')->getDirective('{$directiveName}', {$expression})): ?>";
+        });
+
+        $this->compiler->directive('else' . ucfirst($directiveName), function ($expression) use ($directiveName) {
+            return "<?php elseif (app('blade.helper')->getDirective('{$directiveName}', {$expression})): ?>";
+        });
+
+        $this->compiler->directive('end' . ucfirst($directiveName), function () {
+            return "<?php endif; ?>";
+        });
+    }
 }

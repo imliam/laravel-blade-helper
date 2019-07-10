@@ -24,6 +24,8 @@ As this seems to be the most common use case, this package attempts to help make
 - [Laravel Blade Helper](#laravel-blade-helper)
     - [💾 Installation](#💾-installation)
     - [📝 Usage](#📝-usage)
+        - [Example Helper Directive](#example-helper-directive)
+        - [Custom "if" Directive](#custom-if-directive)
     - [✅ Testing](#✅-testing)
     - [🔖 Changelog](#🔖-changelog)
     - [⬆️ Upgrading](#⬆️-upgrading)
@@ -44,7 +46,7 @@ composer require imliam/laravel-blade-helper:^1.0.0
 
 ## 📝 Usage
 
-The BladeHelper object is bound to Laravel's service container with the name `blade.helper` and can be used by resolving that. A Facade is also made available for convenience. To define a helper, the `->directive(…)` method is used:
+The BladeHelper object is bound to Laravel's service container with the name `blade.helper` and can be used by resolving that. A Facade is also made available for convenience. To define a helper, the `directive(…)` method is used:
 
 ```php
 app('blade.helper')->directive(…);
@@ -121,11 +123,13 @@ BladeHelper::directive('log', null, false);
 // Nothing is echoed
 ```
 
+### Example Helper Directive
+
 One example of a custom Blade helper is to wrap around [FontAwesome 4](https://fontawesome.com/v4.7.0/) icons to make it more convenient to add alternate text for the sake of accessibility:
 
 ```php
 // Define the helper directive
-Blade::directive('fa', function(string $iconName, string $text = null, $classes = '') {
+BladeHelper::directive('fa', function(string $iconName, string $text = null, $classes = '') {
     if (is_array($classes)) {
         $classes = join(' ', $classes);
     }
@@ -137,6 +141,30 @@ Blade::directive('fa', function(string $iconName, string $text = null, $classes 
 
 // Use it in a view
 @fa('email', 'Envelope')
+```
+
+### Custom "if" Directive
+
+Laravel Blade offers [a handy way](https://laravel.com/docs/5.8/blade#custom-if-statements) to define custom "if" statement directives. The Blade Helper package offers an additional method to generate these directives, with `if`, `elseif` and `endif` variants all automatically generated.
+
+An if statement can be defined in the same way as the directive method, but must be given a callable as its second argument:
+
+```php
+BladeHelper::if('largestFirst', function(int $a, int $b): bool {
+    return $a > $b;
+});
+```
+
+Once defined, the helpers can be used directly in your Blade templates:
+
+```html
+@largestFirst(1, 2)
+    Lorem ipsum
+@elseLargestFirst(5, 3)
+    dolor sit amet
+@else
+    consectetur adipiscing elit
+@endLargestFirst
 ```
 
 ## ✅ Testing
