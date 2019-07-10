@@ -41,7 +41,7 @@ As this seems to be the most common use case, this package attempts to help make
 You can install the package with [Composer](https://getcomposer.org/) using the following command:
 
 ```bash
-composer require imliam/laravel-blade-helper:^1.0.0
+composer require imliam/laravel-blade-helper:^1.0
 ```
 
 ## 📝 Usage
