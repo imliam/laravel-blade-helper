@@ -1,4 +1,4 @@
-name: Run tests
+name: Run Tests
 on: [push]
 
 jobs:
@@ -30,10 +30,11 @@ jobs:
         echo "Orchestra Testbench version ${TESTBENCH_VERSION}"
     - name: Install Dependencies
       run: |
+        ${{ matrix.env }}
         composer config discard-changes true
         composer self-update
-        composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-interaction
-        composer require --dev "orchestra/testbench:${TESTBENCH_VERSION}" --no-interaction
+        composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-interaction --no-update
+        composer require --dev "orchestra/testbench:${TESTBENCH_VERSION}" --no-interaction --no-update
         composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest --no-interaction
     - name: Run PHPUnit
       run: php vendor/bin/phpunit
