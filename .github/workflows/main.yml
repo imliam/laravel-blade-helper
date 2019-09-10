@@ -8,8 +8,11 @@ jobs:
       max-parallel: 15
       matrix:
         php-versions: ['7.2', '7.3']
-        laravel-versions: ['5.7.*', '5.8.*', '^6.0']
         composer-flags: ['--prefer-lowest', '--prefer-stable']
+        env:
+            - LARAVEL_VERSION='5.7.*' TESTBENCH_VERSION='3.8.*'
+            - LARAVEL_VERSION='5.8.*' TESTBENCH_VERSION='3.8.*'
+            - LARAVEL_VERSION='^6.0'  TESTBENCH_VERSION='^6.0'
     name: Test on PHP ${{ matrix.php-versions }}, Laravel ${{ matrix.laravel-versions }} and ${{ matrix.composer-flags }}
     steps:
     - name: Checkout
@@ -28,8 +31,9 @@ jobs:
       run: |
         composer config discard-changes true
         composer self-update
-        composer require --dev "laravel/framework:${{ matrix.laravel-versions }}" --no-interaction --no-update
+        composer require --dev "laravel/framework:${LARAVEL}" --no-interaction --no-update
+        composer require --dev "orchestra/testbench:${TESTBENCH}" --no-interaction --no-update
     - name: Install dependencies
-      run: composer update COMPOSER_FLAGS="${{ matrix.composer-flags }}" --no-suggest --no-interaction
+      run: composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest --no-interaction
     - name: Run PHPUnit
       run: php vendor/bin/phpunit
