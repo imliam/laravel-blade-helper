@@ -21,19 +21,19 @@ jobs:
       uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-versions }}
-    - name: Check PHP Version
-      run: php -v
-    - name: Check Composer Version
-      run: composer -V
-    - name: Check PHP Extensions
-      run: php -m
-    - name: Install pre-dependencies
+    - name: Check Environment
+      run: |
+        php -v
+        composer -V
+        php -m
+        echo "Laravel version ${LARAVEL_VERSION}"
+        echo "Orchestra Testbench version ${TESTBENCH_VERSION}"
+    - name: Install Dependencies
       run: |
         composer config discard-changes true
         composer self-update
-        composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-interaction --no-update
-        composer require --dev "orchestra/testbench:${TESTBENCH_VERSION}" --no-interaction --no-update
-    - name: Install dependencies
-      run: composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest --no-interaction
+        composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-interaction
+        composer require --dev "orchestra/testbench:${TESTBENCH_VERSION}" --no-interaction
+        composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest --no-interaction
     - name: Run PHPUnit
       run: php vendor/bin/phpunit
