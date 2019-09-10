@@ -31,8 +31,8 @@ jobs:
       run: |
         composer config discard-changes true
         composer self-update
-        composer require --dev "laravel/framework:${LARAVEL}" --no-interaction --no-update
-        composer require --dev "orchestra/testbench:${TESTBENCH}" --no-interaction --no-update
+        composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-interaction --no-update
+        composer require --dev "orchestra/testbench:${TESTBENCH_VERSION}" --no-interaction --no-update
     - name: Install dependencies
       run: composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest --no-interaction
     - name: Run PHPUnit
