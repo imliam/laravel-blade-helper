@@ -24,6 +24,7 @@ jobs:
         php-version: ${{ matrix.php-versions }}
     - name: Check Environment
       run: |
+        ${{ matrix.env }}
         php -v
         composer -V
         php -m
