@@ -2,10 +2,10 @@
 
 namespace ImLiam\BladeHelper\Tests\Unit;
 
-use Illuminate\View\Compilers\BladeCompiler;
+use Mockery as m;
 use ImLiam\BladeHelper\BladeHelper;
 use ImLiam\BladeHelper\Tests\TestCase;
-use Mockery as m;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class BladeHelperTest extends TestCase
 {
@@ -81,7 +81,7 @@ class BladeHelperTest extends TestCase
         });
         $this->assertCount(3, $this->compiler->getCustomDirectives());
 
-        $string = <<<EOL
+        $string = <<<'EOL'
 @largestFirst(1, 2)
     Lorem ipsum
 @elseLargestFirst(5, 3)
@@ -91,7 +91,7 @@ class BladeHelperTest extends TestCase
 @endLargestFirst
 EOL;
 
-        $expected = <<<EOL
+        $expected = <<<'EOL'
 <?php if (app('blade.helper')->getDirective('largestFirst', 1, 2)): ?>
     Lorem ipsum
 <?php elseif (app('blade.helper')->getDirective('largestFirst', 5, 3)): ?>
