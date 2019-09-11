@@ -77,12 +77,12 @@ class BladeHelper
             return "<?php if (app('blade.helper')->getDirective('{$directiveName}', {$expression})): ?>";
         });
 
-        $this->compiler->directive('else' . ucfirst($directiveName), function ($expression) use ($directiveName) {
+        $this->compiler->directive('else'.ucfirst($directiveName), function ($expression) use ($directiveName) {
             return "<?php elseif (app('blade.helper')->getDirective('{$directiveName}', {$expression})): ?>";
         });
 
-        $this->compiler->directive('end' . ucfirst($directiveName), function () {
-            return "<?php endif; ?>";
+        $this->compiler->directive('end'.ucfirst($directiveName), function () {
+            return '<?php endif; ?>';
         });
     }
 }
