@@ -8,6 +8,10 @@ The changelog format is based on [Keep a Changelog](http://keepachangelog.com/en
 
 ...
 
+## [1.2.0](https://github.com/imliam/laravel-blade-helper/releases/tag/v1.2.0) - 2019-09-10
+
+- Updated for Laravel 6
+
 ## [1.1.0](https://github.com/imliam/laravel-blade-helper/releases/tag/v1.1.0) - 2019-07-10
 
 ## Added

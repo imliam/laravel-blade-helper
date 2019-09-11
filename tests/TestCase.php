@@ -2,8 +2,8 @@
 
 namespace ImLiam\BladeHelper\Tests;
 
-use ImLiam\BladeHelper\BladeHelperServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use ImLiam\BladeHelper\BladeHelperServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
