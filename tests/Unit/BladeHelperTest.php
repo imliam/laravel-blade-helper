@@ -2,10 +2,10 @@
 
 namespace ImLiam\BladeHelper\Tests\Unit;
 
-use Mockery as m;
 use ImLiam\BladeHelper\BladeHelper;
 use ImLiam\BladeHelper\Tests\TestCase;
 use Illuminate\View\Compilers\BladeCompiler;
+use Mockery as m;
 
 class BladeHelperTest extends TestCase
 {
