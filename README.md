@@ -11,7 +11,7 @@ An easier way to define custom Blade directives.
 When creating new custom Blade directives using the `Blade::directive(…)` method, the only parameter made available to manipulate is the expression passed through from the .blade.php file as a raw string. It seems to be rare that developers actually parse the contents of the expression itself within the directive, opting instead to pass the entire expression as arguments to a helper function or a method on another class. For example:
 
 ```php
-BladeHelper::directive('uppercase', function($expression) {
+Illuminate\Support\Facades\Blade::directive('uppercase', function($expression) {
     return "<?php echo strtoupper($expression); ?>";
 });
 ```
