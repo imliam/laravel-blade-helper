@@ -13,6 +13,7 @@ jobs:
         env:
             - LARAVEL_VERSION='^7.0'  TESTBENCH_VERSION='^5.0'
             - LARAVEL_VERSION='^8.0'  TESTBENCH_VERSION='^6.0'
+            - LARAVEL_VERSION='^9.0'  TESTBENCH_VERSION='^7.0'
     name: Test on PHP ${{ matrix.php-versions }}, Laravel ${{ matrix.laravel-versions }} and ${{ matrix.composer-flags }}
     steps:
     - name: Checkout
