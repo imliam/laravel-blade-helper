@@ -1,8 +1,6 @@
 # Laravel Blade Helper
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/imliam/laravel-blade-helper.svg)](https://packagist.org/packages/imliam/laravel-blade-helper)
-[![Build Status](https://img.shields.io/travis/imliam/laravel-blade-helper.svg)](https://travis-ci.org/imliam/laravel-blade-helper)
-[![CI Status](https://github.com/imliam/laravel-blade-helper/workflows/Run%20Tests/badge.svg)](https://github.com/imliam/laravel-blade-helper/actions)
 [![Total Downloads](https://img.shields.io/packagist/dt/imliam/laravel-blade-helper.svg)](https://packagist.org/packages/imliam/laravel-blade-helper)
 [![License](https://img.shields.io/github/license/imliam/laravel-blade-helper.svg)](LICENSE.md)
 
