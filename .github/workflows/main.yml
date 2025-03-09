@@ -1,42 +1,43 @@
-name: Run Tests
-on: [push]
+name: run-tests
+
+on:
+    - push
+    - pull_request
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 15
-      fail-fast: false
-      matrix:
-        php-versions: ['7.3', '7.4', '8.0', 8.1]
-        composer-flags: ['--prefer-lowest', '--prefer-stable']
-        env:
-            - LARAVEL_VERSION='^7.0'  TESTBENCH_VERSION='^5.0'
-            - LARAVEL_VERSION='^8.0'  TESTBENCH_VERSION='^6.0'
-            - LARAVEL_VERSION='^9.0'  TESTBENCH_VERSION='^7.0'
-    name: Test on PHP ${{ matrix.php-versions }}, Laravel ${{ matrix.laravel-versions }} and ${{ matrix.composer-flags }}
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Install PHP
-      uses: shivammathur/setup-php@master
-      with:
-        php-version: ${{ matrix.php-versions }}
-    - name: Check Environment
-      run: |
-        ${{ matrix.env }}
-        php -v
-        composer -V
-        php -m
-        echo "Laravel version ${LARAVEL_VERSION}"
-        echo "Orchestra Testbench version ${TESTBENCH_VERSION}"
-    - name: Install Dependencies
-      run: |
-        ${{ matrix.env }}
-        composer config discard-changes true
-        composer self-update
-        composer require --dev "laravel/framework:${LARAVEL_VERSION}" --no-interaction --no-update
-        composer require --dev "orchestra/testbench:${TESTBENCH_VERSION}" --no-interaction --no-update
-        composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest --no-interaction
-    - name: Run PHPUnit
-      run: php vendor/bin/phpunit
+    test:
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest]
+                php: [8.4, 8.3, 8.2]
+                laravel: [^12.0, ^11.0]
+                dependency-version: [prefer-lowest, prefer-stable]
+                include:
+                    - laravel: ^11.0
+                      testbench: ^9.0
+                    - laravel: ^12.0
+                      testbench: ^10.0
+
+        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                  coverage: none
+
+            - name: Install dependencies
+              run: |
+                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+            - name: Execute tests
+              run: vendor/bin/phpunit
