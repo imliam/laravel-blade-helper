@@ -6,6 +6,7 @@ use Illuminate\View\Compilers\BladeCompiler;
 use ImLiam\BladeHelper\BladeHelper;
 use ImLiam\BladeHelper\Tests\TestCase;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Test;
 
 class BladeHelperTest extends TestCase
 {
@@ -26,7 +27,7 @@ class BladeHelperTest extends TestCase
         parent::tearDown();
     }
 
-    /** @test */
+    #[Test]
     public function custom_named_helpers_compile_correctly()
     {
         $this->assertCount(0, $this->compiler->getCustomDirectives());
@@ -37,7 +38,7 @@ class BladeHelperTest extends TestCase
         $this->assertEquals($expected, $this->compiler->compileString($string));
     }
 
-    /** @test */
+    #[Test]
     public function custom_unnamed_helpers_compile_correctly()
     {
         $this->assertCount(0, $this->compiler->getCustomDirectives());
@@ -48,7 +49,7 @@ class BladeHelperTest extends TestCase
         $this->assertEquals($expected, $this->compiler->compileString($string));
     }
 
-    /** @test */
+    #[Test]
     public function custom_helpers_without_echo_compile_correctly()
     {
         $this->assertCount(0, $this->compiler->getCustomDirectives());
@@ -59,7 +60,7 @@ class BladeHelperTest extends TestCase
         $this->assertEquals($expected, $this->compiler->compileString($string));
     }
 
-    /** @test */
+    #[Test]
     public function custom_helper_callbacks_compile_correctly()
     {
         $this->assertCount(0, $this->compiler->getCustomDirectives());
@@ -72,7 +73,7 @@ class BladeHelperTest extends TestCase
         $this->assertEquals($expected, $this->compiler->compileString($string));
     }
 
-    /** @test */
+    #[Test]
     public function custom_if_helpers_can_be_registered()
     {
         $this->assertCount(0, $this->compiler->getCustomDirectives());
